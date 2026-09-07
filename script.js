@@ -23,3 +23,10 @@ function GetComputerChoice() {
 
 const computerChoice = GetComputerChoice();
 console.log(computerChoice);
+
+function getHumanChoice() {
+  let humanChoice = prompt("Choose one between rock, paper or scissors: ");
+  console.log(humanChoice);
+}
+
+getHumanChoice();
