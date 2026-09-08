@@ -118,11 +118,13 @@ function playGame() {
   humanChoice = getHumanChoice();
 }
 
-for (let i = 0; i < 5; i++) {
+for (let i = 1; i <= 5; i++) {
+  console.log(`----- ROUND ${i} -----`);
   playGame();
 }
 
 function winnerScore() {
+  console.log("---- IT'S RESULT TIME -----");
   if (humanScore === computerScore) {
     console.log(
       `It's Tie: your score is ${humanScore} and computer score is ${computerScore}.`,
