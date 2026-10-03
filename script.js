@@ -26,15 +26,7 @@ document.body.appendChild(paper);
 document.body.appendChild(scissors);
 
 // Selecting and adding event listeners to the buttons.
-
 const btnSelector = document.querySelectorAll(".btn");
-console.log(btnSelector);
-
-btnSelector.forEach(function (btn) {
-  btn.addEventListener("click", function (e) {
-    console.log(btn.textContent.toLocaleLowerCase());
-  });
-});
 
 let GetComputerChoice = function () {
   let choice = Math.floor(Math.random() * 3);
@@ -54,15 +46,16 @@ let GetComputerChoice = function () {
   }
 };
 
-let getHumanChoice = function () {
-  // const humanChoice = prompt(
-  //   "Choose one between rock, paper or scissors: ",
-  // ).toLowerCase();
-  // return humanChoice;
-};
+// let getHumanChoice = function () {
+//   const humanChoice = prompt(
+//     "Choose one between rock, paper or scissors: ",
+//   ).toLowerCase();
+//   return humanChoice;
+// };
 
-let computerChoice = GetComputerChoice();
-let humanChoice = getHumanChoice();
+let computerChoice;
+let humanChoice;
+// let humanChoice = getHumanChoice();
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
@@ -101,7 +94,7 @@ function playRound(humanChoice, computerChoice) {
     );
     humanScore++;
   } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    console.log("you lose! Rock bears Scissors.");
+    console.log("you lose! Rock beats Scissors.");
     console.log(
       `you chose ${humanChoice} and computer chose ${computerChoice}.`,
     );
@@ -145,11 +138,19 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-function playGame() {
-  playRound(humanChoice, computerChoice);
-  computerChoice = GetComputerChoice();
-  humanChoice = getHumanChoice();
-}
+btnSelector.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    humanChoice = btn.textContent.toLocaleLowerCase();
+    computerChoice = GetComputerChoice();
+    playRound(humanChoice, computerChoice);
+  });
+});
+
+// function playGame() {
+//   playRound(humanChoice, computerChoice);
+//   computerChoice = GetComputerChoice();
+//   humanChoice = getHumanChoice();
+// }
 
 // for (let i = 1; i <= 5; i++) {
 //   console.log(`----- ROUND ${i} -----`);
