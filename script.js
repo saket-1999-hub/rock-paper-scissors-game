@@ -3,6 +3,39 @@
 let humanScore = 0;
 let computerScore = 0;
 
+// creating button elements for rock, paper, scissors.
+
+const rock = document.createElement("button");
+const paper = document.createElement("button");
+const scissors = document.createElement("button");
+
+rock.textContent = "Rock";
+paper.textContent = "Paper";
+scissors.textContent = "Scissors";
+
+// Adding class names to the buttons.
+
+rock.classList.add("btn", "rock");
+paper.classList.add("btn", "paper");
+scissors.classList.add("btn", "scissors");
+
+// Appending buttons elements to the document.
+
+document.body.appendChild(rock);
+document.body.appendChild(paper);
+document.body.appendChild(scissors);
+
+// Selecting and adding event listeners to the buttons.
+
+const btnSelector = document.querySelectorAll(".btn");
+console.log(btnSelector);
+
+btnSelector.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    console.log(btn.textContent.toLocaleLowerCase());
+  });
+});
+
 let GetComputerChoice = function () {
   let choice = Math.floor(Math.random() * 3);
 
@@ -22,10 +55,10 @@ let GetComputerChoice = function () {
 };
 
 let getHumanChoice = function () {
-  const humanChoice = prompt(
-    "Choose one between rock, paper or scissors: ",
-  ).toLowerCase();
-  return humanChoice;
+  // const humanChoice = prompt(
+  //   "Choose one between rock, paper or scissors: ",
+  // ).toLowerCase();
+  // return humanChoice;
 };
 
 let computerChoice = GetComputerChoice();
@@ -118,10 +151,10 @@ function playGame() {
   humanChoice = getHumanChoice();
 }
 
-for (let i = 1; i <= 5; i++) {
-  console.log(`----- ROUND ${i} -----`);
-  playGame();
-}
+// for (let i = 1; i <= 5; i++) {
+//   console.log(`----- ROUND ${i} -----`);
+//   playGame();
+// }
 
 function winnerScore() {
   console.log("---- IT'S RESULT TIME -----");
