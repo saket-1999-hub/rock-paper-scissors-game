@@ -2,26 +2,38 @@
 
 let humanScore = 0;
 let computerScore = 0;
+let playing = true;
+
+const playerScore = document.querySelector(".human-score");
+const machineScore = document.querySelector(".computer-score");
+const askMsg = document.querySelector(".ask-msg");
 
 // creating button elements for rock, paper, scissors.
 
 const rock = document.createElement("button");
 const paper = document.createElement("button");
 const scissors = document.createElement("button");
+const reset = document.createElement("button");
 
 // create div element for displaying the message.
 const message = document.createElement("div");
+const showHumanScore = document.createElement("div");
+const showComputerScore = document.createElement("div");
 
 rock.textContent = "Rock";
 paper.textContent = "Paper";
 scissors.textContent = "Scissors";
+reset.textContent = "Play Again";
 
 // Adding class names to the buttons & div.
 
-rock.classList.add("btn", "rock");
-paper.classList.add("btn", "paper");
-scissors.classList.add("btn", "scissors");
-message.classList.add("msg");
+rock.classList.add("btn", "rock", "btn-choice");
+paper.classList.add("btn", "paper", "btn-choice");
+scissors.classList.add("btn", "scissors", "btn-choice");
+reset.classList.add("btn", "game-reset");
+message.classList.add("msg", "msg-div");
+showHumanScore.classList.add("show-human-score", "msg-div");
+showComputerScore.classList.add("show-computer-score", "msg-div");
 
 // Appending buttons elements & div to the document.
 
@@ -29,9 +41,16 @@ document.body.appendChild(rock);
 document.body.appendChild(paper);
 document.body.appendChild(scissors);
 document.body.appendChild(message);
+document.body.appendChild(showHumanScore);
+document.body.appendChild(showComputerScore);
+document.body.appendChild(reset);
+
+// Showing initial scores
+showHumanScore.textContent = `Player Score: ${humanScore}`;
+showComputerScore.textContent = `Computer Score: ${computerScore}`;
 
 // Selecting and adding event listeners to the buttons.
-const btnSelector = document.querySelectorAll(".btn");
+const btnSelector = document.querySelectorAll(".btn-choice");
 
 let GetComputerChoice = function () {
   let choice = Math.floor(Math.random() * 3);
@@ -39,28 +58,14 @@ let GetComputerChoice = function () {
   switch (choice) {
     case 0:
       return "rock";
-      break;
 
     case 1:
       return "paper";
-      break;
 
     case 2:
       return "scissors";
-      break;
   }
 };
-
-// let getHumanChoice = function () {
-//   const humanChoice = prompt(
-//     "Choose one between rock, paper or scissors: ",
-//   ).toLowerCase();
-//   return humanChoice;
-// };
-
-let computerChoice;
-let humanChoice;
-// let humanChoice = getHumanChoice();
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
@@ -92,40 +97,50 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-btnSelector.forEach(function (btn) {
-  btn.addEventListener("click", function (e) {
-    humanChoice = btn.textContent.toLocaleLowerCase();
-    computerChoice = GetComputerChoice();
+function playingTheGame(btn) {
+  if (playing) {
+    let humanChoice = btn.textContent.toLocaleLowerCase();
+    let computerChoice = GetComputerChoice();
     playRound(humanChoice, computerChoice);
-  });
-});
 
-// function playGame() {
-//   playRound(humanChoice, computerChoice);
-//   computerChoice = GetComputerChoice();
-//   humanChoice = getHumanChoice();
-// }
+    // Showing updated score
+    showHumanScore.textContent = `Player Score: ${humanScore}`;
+    showComputerScore.textContent = `Computer Score: ${computerScore}`;
 
-// for (let i = 1; i <= 5; i++) {
-//   console.log(`----- ROUND ${i} -----`);
-//   playGame();
-// }
-
-function winnerScore() {
-  console.log("---- IT'S RESULT TIME -----");
-  if (humanScore === computerScore) {
-    console.log(
-      `It's Tie: your score is ${humanScore} and computer score is ${computerScore}.`,
-    );
-  } else if (humanScore > computerScore) {
-    console.log(
-      `You won!: your score is ${humanScore} and computer score is ${computerScore}.`,
-    );
-  } else if (humanScore < computerScore) {
-    console.log(
-      `YOU Lose!: your score is ${humanScore} and computer score is ${computerScore}.`,
-    );
+    // checking winner
+    if (humanScore === 5) {
+      message.textContent = "";
+      askMsg.textContent = "You Won The Game";
+      playing = false;
+    } else if (computerScore === 5) {
+      message.textContent = "";
+      askMsg.textContent = "Computer Won The Game";
+      playing = false;
+    }
   }
 }
 
-winnerScore();
+btnSelector.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    playingTheGame(btn);
+  });
+});
+
+// function winnerScore() {
+//   console.log("---- IT'S RESULT TIME -----");
+//   if (humanScore === computerScore) {
+//     console.log(
+//       `It's Tie: your score is ${humanScore} and computer score is ${computerScore}.`,
+//     );
+//   } else if (humanScore > computerScore) {
+//     console.log(
+//       `You won!: your score is ${humanScore} and computer score is ${computerScore}.`,
+//     );
+//   } else if (humanScore < computerScore) {
+//     console.log(
+//       `YOU Lose!: your score is ${humanScore} and computer score is ${computerScore}.`,
+//     );
+//   }
+// }
+
+// winnerScore();
