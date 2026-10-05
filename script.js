@@ -132,6 +132,7 @@ reset.addEventListener("click", () => {
   humanScore = 0;
   computerScore = 0;
   askMsg.textContent = "Choose What You want!";
+  message.textContent = "";
   showHumanScore.textContent = `Player Score: ${humanScore}`;
   showComputerScore.textContent = `Computer Score: ${computerScore}`;
   playing = true;
