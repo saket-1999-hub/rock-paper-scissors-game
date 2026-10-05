@@ -126,21 +126,13 @@ btnSelector.forEach((btn) => {
   });
 });
 
-// function winnerScore() {
-//   console.log("---- IT'S RESULT TIME -----");
-//   if (humanScore === computerScore) {
-//     console.log(
-//       `It's Tie: your score is ${humanScore} and computer score is ${computerScore}.`,
-//     );
-//   } else if (humanScore > computerScore) {
-//     console.log(
-//       `You won!: your score is ${humanScore} and computer score is ${computerScore}.`,
-//     );
-//   } else if (humanScore < computerScore) {
-//     console.log(
-//       `YOU Lose!: your score is ${humanScore} and computer score is ${computerScore}.`,
-//     );
-//   }
-// }
+// Play Again
 
-// winnerScore();
+reset.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+  askMsg.textContent = "Choose What You want!";
+  showHumanScore.textContent = `Player Score: ${humanScore}`;
+  showComputerScore.textContent = `Computer Score: ${computerScore}`;
+  playing = true;
+});
